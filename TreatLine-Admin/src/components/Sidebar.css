@@ -1,0 +1,152 @@
+:root {
+    --primary-gradient: linear-gradient(135deg, #0f4c81 0%, #3a8dff 100%);
+    --secondary-gradient: linear-gradient(135deg, #00b4d8 0%, #00d4ff 100%);
+    --accent-gradient: linear-gradient(45deg, #00ba88 0%, #2ed573 100%);
+    --primary-dark: #0f4c81;
+    --primary-light: #3a8dff;
+    --shadow-md: 0 8px 20px rgba(15, 76, 129, 0.12);
+    --transition-normal: 0.3s ease;
+}
+
+.dashboard-container {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.sidebar {
+    width: 250px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto; /* Enable vertical scrolling for the sidebar */
+    position: sticky; /* Keep the sidebar fixed while scrolling */
+    top: 0; /* Stick the sidebar to the top */
+    height: 100vh; /* Ensure the sidebar takes the full height of the viewport */
+    background: var(--primary-gradient);
+    padding: 20px;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition-normal);
+}
+
+.sidebar h2 {
+    margin-bottom: 30px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #ecf0f1;
+    text-align: center;
+    border-bottom: 2px solid #ecf0f1;
+    padding-bottom: 10px;
+    width: 100%;
+}
+
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+.sidebar nav ul li {
+    margin-bottom: 15px;
+    width: 100%;
+    padding : 0;
+}
+
+.sidebar nav ul li button {
+    width: 100%;
+    padding: 12px 15px;
+    background: linear-gradient(135deg, #3a8dff, #1e90ff); /* Blue gradient background */
+    color: white;
+    border: none; /* Remove border */
+    border-radius: 8px;
+    text-align: left;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+}
+
+.sidebar nav ul li button:hover {
+    background: linear-gradient(135deg, #1e90ff, #007bff); /* Darker blue gradient on hover */
+    transform: translateX(5px); /* Slight movement on hover */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+}
+
+.sidebar nav ul li button:focus {
+    outline: none;
+    background: linear-gradient(135deg, #007bff, #0056b3); /* Focus state gradient */
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5); /* Focus ring */
+}
+
+.sidebar nav ul li button.active {
+    background: linear-gradient(135deg, #0056b3, #003f7f); /* Active state gradient */
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Slightly stronger shadow */
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        padding: 15px;
+        margin-left: 0; /* Remove margin on mobile */
+        padding-left: 20px; /* Reset padding on mobile */
+    }
+
+    .brand-container {
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    .sidebar nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+    }
+
+    .sidebar nav ul li {
+        margin: 0;
+        width: calc(50% - 10px);
+    }
+
+    .sidebar nav ul li button {
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar nav ul li {
+        width: 100%;
+    }
+
+    .brand-name {
+        font-size: 1.5rem;
+    }
+
+    .sidebar h2 {
+        font-size: 1.2rem;
+        text-align: center;
+    }
+
+    .sidebar h2::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    font-size: 14px;
+    color: #bdc3c7;
+    text-align: center;
+}
+
+.main-content {
+    flex-grow: 1;
+    overflow-y: auto; /* Enable vertical scrolling for the right-side content */
+    padding: 20px;
+    background-color: #f9f9f9;
+}
