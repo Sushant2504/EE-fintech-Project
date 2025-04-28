@@ -211,90 +211,90 @@ const BookAppointment = () => {
         setShowResults(true); // Show results section
     };
 
-    // let cashfree; 
+    let cashfree; 
     
-    // let insitialzeSDK = async function () {
-    //     cashfree = await load({
-    //         mode: "sandbox",
-    //     })
-    // }
+    let insitialzeSDK = async function () {
+        cashfree = await load({
+            mode: "sandbox",
+        })
+    }
     
-    // insitialzeSDK()
-    
-    
-    // const [orderId, setOrderId] = useState("")
-    
-    // const getSessionId = async () => {
-    //     try {
-    //         let res = await axios.get("https://cashfreepayment-seven.vercel.app/payment")
-    //         if (res.data && res.data.payment_session_id) {
-    //             console.log(res.data)
-    //             setOrderId(res.data.order_id)
-    //             return res.data.payment_session_id
-    //         }
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    // }
+    insitialzeSDK()
     
     
-    // const verifyPayment = async (doctorId) => {
-    //     try {
-    //         let res = await axios.post("https://cashfreepayment-seven.vercel.app/verify", {
-    //             orderId: orderId
-    //         });
+    const [orderId, setOrderId] = useState("")
+    
+    const getSessionId = async () => {
+        try {
+            let res = await axios.get("https://cashfreepayment-seven.vercel.app/payment")
+            if (res.data && res.data.payment_session_id) {
+                console.log(res.data)
+                setOrderId(res.data.order_id)
+                return res.data.payment_session_id
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    
+    
+    const verifyPayment = async (doctorId) => {
+        try {
+            let res = await axios.post("https://cashfreepayment-seven.vercel.app/verify", {
+                orderId: orderId
+            });
 
-    //         console.log(res);
+            console.log(res);
 
-    //         if (res && res.data[0].payment_status === "SUCCESS") {
-    //             alert("Payment verified");
-    //             const timeSlot = timeSlots.indexOf(selectedSlot);
-    //             // Pass doctorId to bookAppointment
-    //             dispatch(bookAppointment({ doctorId, symptoms, timeSlot, priority_score, language })).unwrap()
-    //                 .then(() => {
-    //                     alert('Appointment Query Raised successfully!');
-    //                 })
-    //                 .catch((err) => {
-    //                     alert('Failed to book appointment:', err);
-    //                 });
-    //                 setShowResults(false);
-    //         }
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // };
+            if (res && res.data[0].payment_status === "SUCCESS") {
+                alert("Payment verified");
+                const timeSlot = timeSlots.indexOf(selectedSlot);
+                // Pass doctorId to bookAppointment
+                dispatch(bookAppointment({ doctorId, symptoms, timeSlot, priority_score, language })).unwrap()
+                    .then(() => {
+                        alert('Appointment Query Raised successfully!');
+                    })
+                    .catch((err) => {
+                        alert('Failed to book appointment:', err);
+                    });
+                    setShowResults(false);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
-    // const handleClick = async (doctorId) => {
-    //     try {
-    //         let sessionId = await getSessionId();
-    //         let checkoutOptions = {
-    //             paymentSessionId: sessionId,
-    //             redirectTarget: "_modal",
-    //         };
+    const handleClick = async (doctorId) => {
+        try {
+            let sessionId = await getSessionId();
+            let checkoutOptions = {
+                paymentSessionId: sessionId,
+                redirectTarget: "_modal",
+            };
 
-    //         cashfree.checkout(checkoutOptions).then((res) => {
-    //             console.log("Payment initialized");
-    //             // Pass doctorId to verifyPayment
-    //             verifyPayment(doctorId);
-    //         });
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // };
+            cashfree.checkout(checkoutOptions).then((res) => {
+                console.log("Payment initialized");
+                // Pass doctorId to verifyPayment
+                verifyPayment(doctorId);
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
-    // const handleBookAppointment = (doctorId) => {
-    //     // handleClick(doctorId); // Pass doctorId to handleClick
-    //     const timeSlot = timeSlots.indexOf(selectedSlot);
-    //             // Pass doctorId to bookAppointment
-    //             dispatch(bookAppointment({ doctorId, symptoms, timeSlot, priority_score, language })).unwrap()
-    //                 .then(() => {
-    //                     alert('Appointment Query Raised successfully!');
-    //                 })
-    //                 .catch((err) => {
-    //                     alert('Failed to book appointment:', err);
-    //                 });
-    //                 setShowResults(false);
-    // };
+    const handleBookAppointment = (doctorId) => {
+        // handleClick(doctorId); // Pass doctorId to handleClick
+        const timeSlot = timeSlots.indexOf(selectedSlot);
+                // Pass doctorId to bookAppointment
+                dispatch(bookAppointment({ doctorId, symptoms, timeSlot, priority_score, language })).unwrap()
+                    .then(() => {
+                        alert('Appointment Query Raised successfully!');
+                    })
+                    .catch((err) => {
+                        alert('Failed to book appointment:', err);
+                    });
+                    setShowResults(false);
+    };
 
 
 
